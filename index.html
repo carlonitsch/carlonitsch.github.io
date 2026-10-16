@@ -7,7 +7,7 @@
 <meta name="description" content="Carlo Nitsch, Full Professor in Mathematical Analysis, University of Naples Federico II.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
     --bg: #f4f5f8;
@@ -17,8 +17,9 @@
     --line: #dcdfe7;
     --accent: #3b3f9e;
     --accent-soft: #e6e7f6;
-    --serif: "Source Serif 4", Georgia, serif;
-    --sans: "Inter", system-ui, -apple-system, sans-serif;
+    --serif: "IBM Plex Sans", system-ui, -apple-system, sans-serif;
+    --sans: "IBM Plex Sans", system-ui, -apple-system, sans-serif;
+    --mono: "IBM Plex Mono", ui-monospace, monospace;
   }
   @media (prefers-color-scheme: dark) {
     :root {
@@ -135,13 +136,22 @@
 
   footer { max-width: 960px; margin: 0 auto; padding: 24px; border-top: 1px solid var(--line); font: 13px var(--sans); color: var(--muted); }
 
+  /* Stile Moderno */
+  body { font-size: 16.5px; }
+  .hero h1 { font-weight: 700; font-size: 46px; letter-spacing: -.025em; }
+  .hero .role { color: var(--accent); font-weight: 600; font-size: 18px; }
+  h2 { font: 700 26px/1.2 var(--sans); text-transform: none; letter-spacing: -.015em; color: var(--ink); border-bottom: 0; padding: 0 0 0 14px; border-left: 4px solid var(--accent); }
+  .when, .year, .card .k, .contact .k, .talks .m, .tag { font-family: var(--mono); }
+  .pubs .venue { font-style: normal; color: var(--accent); }
+  .hero img { border-radius: 50%; width: 200px; height: 200px; }
+
   @media (max-width: 720px) {
     body { font-size: 16px; }
     nav .inner { padding: 12px 16px; gap: 14px; overflow-x: auto; }
     nav .brand { display: none; }
     main { padding: 0 16px 64px; }
     .hero { grid-template-columns: 1fr; gap: 24px; padding-top: 40px; text-align: left; }
-    .hero img { width: 160px; height: 172px; }
+    .hero img { width: 150px; height: 150px; }
     .hero h1 { font-size: 34px; }
     .timeline li { grid-template-columns: 1fr; gap: 2px; }
     .contact { grid-template-columns: 1fr; }
@@ -304,6 +314,7 @@
 </main>
 
 <footer>© <span id="yr"></span> Carlo Nitsch</footer>
+
 
 
 <script>
