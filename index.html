@@ -1,0 +1,402 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Carlo Nitsch</title>
+<meta name="description" content="Carlo Nitsch, Full Professor in Mathematical Analysis, University of Naples Federico II.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f5f8;
+    --surface: #ffffff;
+    --ink: #1d1d1f;
+    --muted: #5f6368;
+    --line: #dcdfe7;
+    --accent: #3b3f9e;
+    --accent-soft: #e6e7f6;
+    --serif: "Source Serif 4", Georgia, serif;
+    --sans: "Inter", system-ui, -apple-system, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #12131a;
+      --surface: #1a1b24;
+      --ink: #e8e6e1;
+      --muted: #a2a6ad;
+      --line: #2c2e3b;
+      --accent: #a6aaf2;
+      --accent-soft: #262844;
+    }
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; scroll-padding-top: 72px; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font: 17px/1.65 var(--serif);
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  nav {
+    position: sticky; top: 0; z-index: 10;
+    background: color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+  nav .inner {
+    max-width: 960px; margin: 0 auto; padding: 14px 24px;
+    display: flex; align-items: center; gap: 24px;
+    font-family: var(--sans); font-size: 14px;
+  }
+  nav .brand { font-weight: 600; color: var(--ink); margin-right: auto; }
+  nav a.link { color: var(--muted); }
+  nav a.link:hover { color: var(--ink); text-decoration: none; }
+
+  main { max-width: 960px; margin: 0 auto; padding: 0 24px 80px; }
+  section { padding: 56px 0 8px; }
+  h2 {
+    font: 600 13px/1 var(--sans); letter-spacing: .12em; text-transform: uppercase;
+    color: var(--muted); margin: 0 0 24px; padding-bottom: 12px; border-bottom: 1px solid var(--line);
+  }
+  h3 { font: 600 15px/1.4 var(--sans); margin: 32px 0 12px; }
+
+  .hero {
+    display: grid; grid-template-columns: 220px 1fr; gap: 40px; align-items: center;
+    padding: 64px 0 24px;
+  }
+  .hero img {
+    width: 220px; height: 236px; object-fit: cover; border-radius: 6px;
+    box-shadow: 0 1px 2px rgba(0,0,0,.08), 0 8px 24px rgba(0,0,0,.06);
+  }
+  .hero h1 { font-weight: 600; font-size: 44px; line-height: 1.1; margin: 0 0 8px; letter-spacing: -.01em; }
+  .hero .role { font-size: 20px; margin: 0 0 16px; }
+  .hero .affil { font-family: var(--sans); font-size: 14px; color: var(--muted); line-height: 1.7; margin: 0; }
+  .hero .affil a { color: var(--muted); border-bottom: 1px solid var(--line); }
+  .hero .affil a:hover { color: var(--accent); text-decoration: none; }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; font-family: var(--sans); font-size: 13px; }
+  .chips a {
+    padding: 6px 12px; border: 1px solid var(--line); border-radius: 999px; color: var(--ink); background: var(--surface);
+  }
+  .chips a:hover { border-color: var(--accent); color: var(--accent); text-decoration: none; }
+
+  .about p { margin: 0 0 1em; max-width: 68ch; }
+
+  .timeline { list-style: none; margin: 0; padding: 0; }
+  .timeline li {
+    display: grid; grid-template-columns: 170px 1fr; gap: 20px;
+    padding: 10px 0; border-bottom: 1px dashed var(--line);
+  }
+  .timeline li:last-child { border-bottom: 0; }
+  .timeline .when { font: 500 13px/1.9 var(--sans); color: var(--muted); }
+  .timeline .what small { display: block; color: var(--muted); font-size: 15px; }
+
+  .pubtools { display: flex; gap: 12px; align-items: center; margin-bottom: 8px; font-family: var(--sans); font-size: 14px; }
+  .pubtools input {
+    flex: 1; max-width: 360px; padding: 9px 12px; border: 1px solid var(--line); border-radius: 6px;
+    background: var(--surface); color: var(--ink); font: inherit;
+  }
+  .pubtools input:focus { outline: 2px solid var(--accent-soft); border-color: var(--accent); }
+  .pubtools .count { color: var(--muted); }
+  .year { font: 600 14px/1 var(--sans); color: var(--accent); margin: 28px 0 6px; }
+  .pubs { list-style: none; margin: 0; padding: 0; }
+  .pubs li { padding: 8px 0 10px; }
+  .pubs .title { font-weight: 600; }
+  .pubs .authors { color: var(--muted); font-size: 15px; }
+  .pubs .venue { font-style: italic; font-size: 15px; }
+  .pubs .tag {
+    display: inline-block; font: 500 11px/1 var(--sans); padding: 4px 7px; border-radius: 4px;
+    background: var(--accent-soft); color: var(--accent); margin-left: 6px; vertical-align: 2px;
+  }
+  .pubs .tag:hover { text-decoration: none; filter: brightness(.95); }
+
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 18px 20px; }
+  .card .k { font: 500 12px/1.4 var(--sans); color: var(--muted); text-transform: uppercase; letter-spacing: .06em; }
+  .card .v { font-weight: 600; margin: 4px 0 2px; }
+  .card .d { color: var(--muted); font-size: 15px; }
+
+  .talks { list-style: none; padding: 0; margin: 0; }
+  .talks li { padding: 8px 0; border-bottom: 1px dashed var(--line); }
+  .talks li:last-child { border-bottom: 0; }
+  .talks .t { font-style: italic; }
+  .talks .m { color: var(--muted); font-size: 15px; }
+
+  .contact { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; font-size: 16px; }
+  .contact p { margin: 0; }
+  .contact .k { font: 500 12px/1.4 var(--sans); color: var(--muted); text-transform: uppercase; letter-spacing: .06em; margin-bottom: 4px; }
+
+  footer { max-width: 960px; margin: 0 auto; padding: 24px; border-top: 1px solid var(--line); font: 13px var(--sans); color: var(--muted); }
+
+  @media (max-width: 720px) {
+    body { font-size: 16px; }
+    nav .inner { padding: 12px 16px; gap: 14px; overflow-x: auto; }
+    nav .brand { display: none; }
+    main { padding: 0 16px 64px; }
+    .hero { grid-template-columns: 1fr; gap: 24px; padding-top: 40px; text-align: left; }
+    .hero img { width: 160px; height: 172px; }
+    .hero h1 { font-size: 34px; }
+    .timeline li { grid-template-columns: 1fr; gap: 2px; }
+    .contact { grid-template-columns: 1fr; }
+    footer { padding: 24px 16px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="inner">
+    <a class="brand" href="#top">Carlo Nitsch</a>
+    <a class="link" href="#about">About</a>
+    <a class="link" href="#cv">CV</a>
+    <a class="link" href="#publications">Publications</a>
+    <a class="link" href="#outreach">Outreach</a>
+    <a class="link" href="#contact">Contact</a>
+  </div>
+</nav>
+
+<main id="top">
+
+  <header class="hero">
+    <img src="img/portrait.jpg" alt="Portrait of Carlo Nitsch">
+    <div>
+      <h1>Carlo Nitsch</h1>
+      <p class="role">Full Professor in Mathematical Analysis</p>
+      <p class="affil">
+        <a href="https://www.matematica.unina.it/">Dipartimento di Matematica e Applicazioni “R.&nbsp;Caccioppoli”</a><br>
+        <a href="https://www.unina.it/">Università degli Studi di Napoli Federico II</a>
+      </p>
+      <div class="chips">
+        <a href="mailto:c.nitsch@unina.it">c.nitsch@unina.it</a>
+        <a href="https://www.docenti.unina.it/#!/professor/4341524c4f4e49545343484e545343524c37364131324638333955/riferimenti">Teaching (docenti.unina.it)</a>
+        <a href="#publications">Publications</a>
+      </div>
+    </div>
+  </header>
+
+  <section id="about" class="about">
+    <h2>About me</h2>
+    <p>I graduated in Physics at the University of Naples Federico II in 1999 and earned my Ph.D. in Mathematics at the University of Rome La Sapienza (2000–2004). During my doctorate I spent a year as a visiting student at the Lawrence Berkeley National Laboratory (2002–2003).</p>
+    <p>I joined the University of Naples Federico II as a researcher in Mathematical Analysis in 2005, became Associate Professor in 2014 and Full Professor in 2018. I received the Carlo Miranda Prize for Mathematical Analysis in 2008 and an Alexander von Humboldt Research Fellowship for Experienced Researchers in 2013.</p>
+    <p>I am a member of the <a href="https://www.accademiapontaniana.it/">Accademia Pontaniana</a> (since 2022) and of the Accademia di Scienze Fisiche e Matematiche of the <a href="http://www.societanazionalescienzeletterearti.it/">Società Nazionale di Scienze, Lettere ed Arti in Napoli</a> (since 2024). I coordinate the Ph.D. program <a href="https://www.ssmeridionale.it/">Mathematical and Physical Sciences for Advanced Materials and Technologies</a> at the Scuola Superiore Meridionale and serve on the board of the Ph.D. program <a href="http://www.matematica.unina.it/it/didattica/dottorato.html">Matematica e Applicazioni</a>.</p>
+    <p>My research focuses on shape optimization, isoperimetric and functional inequalities, spectral problems with Robin boundary conditions, overdetermined problems, symmetrization and thermal insulation.</p>
+  </section>
+
+  <section id="cv">
+    <h2>Short vitae</h2>
+
+    <h3>Academic career</h3>
+    <ul class="timeline">
+      <li><span class="when">2018 – present</span><span class="what">Full Professor in Mathematical Analysis<small>Dept. of Mathematics and Applications “R. Caccioppoli”, University of Naples Federico II</small></span></li>
+      <li><span class="when">2014 – 2018</span><span class="what">Associate Professor in Mathematical Analysis<small>University of Naples Federico II</small></span></li>
+      <li><span class="when">2005 – 2014</span><span class="what">Researcher in Mathematical Analysis<small>University of Naples Federico II</small></span></li>
+      <li><span class="when">2004</span><span class="what">Ph.D. in Mathematics, University of Rome La Sapienza<small>Thesis: “Some mathematical problems in nonlocal continuum damage mechanics”. Advisor: Prof. Michiel Bertsch</small></span></li>
+      <li><span class="when">1999</span><span class="what">Degree in Physics (110/110 cum laude), University of Naples Federico II<small>Thesis: “Symmetrization methods and their applications”. Advisor: Prof. Angelo Alvino</small></span></li>
+    </ul>
+
+    <h3>Research stays abroad</h3>
+    <ul class="timeline">
+      <li><span class="when">2014</span><span class="what">Mathematisches Institut, University of Cologne, Germany<small>Alexander von Humboldt Fellowship for experienced researchers</small></span></li>
+      <li><span class="when">2009</span><span class="what">Mathematical Sciences Institute, Australian National University, Canberra<small>Invited by Prof. N. Trudinger</small></span></li>
+      <li><span class="when">2002 – 2003</span><span class="what">Lawrence Berkeley National Laboratory, Berkeley, USA<small>Visiting student under the supervision of Prof. G.I. Barenblatt</small></span></li>
+      <li><span class="when">2001</span><span class="what">CMLA, École Normale Supérieure de Cachan, Paris, France</span></li>
+    </ul>
+
+    <h3>Awards and recognitions</h3>
+    <ul class="timeline">
+      <li><span class="when">2024</span><span class="what">Member of the Accademia di Scienze Fisiche e Matematiche (SNSLA), Classe di Scienze Matematiche</span></li>
+      <li><span class="when">2022</span><span class="what">Member of the Accademia Pontaniana, Class I – Pure and Applied Mathematical Sciences</span></li>
+      <li><span class="when">2019</span><span class="what">Keynote speaker (Conferenza Generale), XXI Congress of the Unione Matematica Italiana, Pavia</span></li>
+      <li><span class="when">2013</span><span class="what">Alexander von Humboldt Fellowship for experienced researchers</span></li>
+      <li><span class="when">2008</span><span class="what">Carlo Miranda Prize for young researchers in Mathematical Analysis<small>Accademia di Scienze Fisiche e Matematiche, SNSLA Napoli</small></span></li>
+    </ul>
+
+    <h3>Management</h3>
+    <ul class="timeline">
+      <li><span class="when">Cycle XLII</span><span class="what">Coordinator, Ph.D. program “Mathematical and Physical Sciences for Advanced Materials and Technologies”<small>Scuola Superiore Meridionale</small></span></li>
+      <li><span class="when">Cycles XXXVIII–XLI</span><span class="what">Coordinator, Ph.D. program “Matematica e Applicazioni”<small>University of Naples Federico II</small></span></li>
+      <li><span class="when">2020 – present</span><span class="what">Board member, Ph.D. program “Mathematical and Physical Sciences for Advanced Materials and Technologies”</span></li>
+      <li><span class="when">2017 – present</span><span class="what">Board member, Ph.D. program “Matematica e Applicazioni”</span></li>
+      <li><span class="when"></span><span class="what">Member of the Presidio di Qualità, Scuola Superiore Meridionale</span></li>
+    </ul>
+
+    <h3>Research projects</h3>
+    <ul class="timeline">
+      <li><span class="when">2023</span><span class="what">Symmetry and Asymmetry in PDEs<small>INdAM-GNAMPA, 12 months</small></span></li>
+      <li><span class="when">2018</span><span class="what">Geometric Aspects of PDEs and Functional Inequalities in Optimal Form<small>INdAM-GNAMPA, 12 months</small></span></li>
+      <li><span class="when">2013</span><span class="what">Sobolev–Poincaré Inequalities: Embedding Constants, Stability Issues, Nonlinear Eigenvalues<small>STAR Program, University of Naples Federico II with Compagnia San Paolo and Istituto Banco di Napoli, 18 months</small></span></li>
+      <li><span class="when">2013</span><span class="what">Functional Inequalities and Overdetermined Problems<small>INdAM-GNAMPA, 12 months</small></span></li>
+      <li><span class="when">2009</span><span class="what">Solutions of Partial Differential Equations: Analytical and Geometric Aspects<small>INdAM-GNAMPA, 12 months</small></span></li>
+      <li><span class="when">2007</span><span class="what">Isoperimetric Inequalities and Stability<small>Regione Campania, Legge Regionale 5, 12 months</small></span></li>
+    </ul>
+
+    <h3>Editorial activities</h3>
+    <ul class="timeline">
+      <li><span class="when">2016</span><span class="what">Editor, <i>Geometric Properties for Parabolic and Elliptic PDE’s</i><small>Springer Proceedings in Mathematics &amp; Statistics</small></span></li>
+      <li><span class="when">2009</span><span class="what">Editor, <i>Renato Caccioppoli: hanno detto di lui</i></span></li>
+    </ul>
+  </section>
+
+  <section id="publications">
+    <h2>Publications</h2>
+    <div class="pubtools">
+      <input id="pubsearch" type="search" placeholder="Search title, coauthor, journal…" aria-label="Search publications">
+      <span class="count" id="pubcount"></span>
+    </div>
+    <div id="publist"></div>
+  </section>
+
+  <section id="outreach">
+    <h2>Outreach</h2>
+    <h3>Books</h3>
+    <div class="cards">
+      <div class="card">
+        <div class="k">Salerno Editrice · Astrolabio · 2018</div>
+        <div class="v">Anche le cicale sanno contare</div>
+        <div class="d">with Guido Trombetti · ISBN 8869732959</div>
+      </div>
+      <div class="card">
+        <div class="k">Le Scienze · 2023</div>
+        <div class="v">Teorema fondamentale del calcolo</div>
+        <div class="d">Series “Rivoluzioni Matematiche. I grandi teoremi da Pitagora a Nash”</div>
+      </div>
+    </div>
+
+    <h3>Selected public lectures</h3>
+    <ul class="talks">
+      <li><span class="t">La matematica del cubo di Rubik</span><br><span class="m">27 Feb 2026 · Matematic@…mente, Liceo Scientifico Piero Calamandrei, Napoli</span></li>
+      <li><span class="t">Cosa ha dato la matematica alla meccanica quantistica e cosa ha ricevuto</span><br><span class="m">13 Feb 2026 · I Pomeriggi della Fisica e della Matematica, L.S. Gaetano Salvemini, Bari</span></li>
+      <li><span class="t">Mapematica</span><br><span class="m">13 Feb 2026 · Log@ritmi: l’impronta digitale, L.S. Gaetano Salvemini, Bari</span></li>
+      <li><span class="t">Architetti senza compasso</span><br><span class="m">6 Dec 2025 · Mathesis: un viaggio di 130 anni tra numeri, parole, forme e suoni, Vicenza</span></li>
+      <li><span class="t">Cosa ha dato la matematica alla meccanica quantistica e cosa ha ricevuto</span><br><span class="m">24 Nov 2025 · Scienza e Tecnologia Quantistica, SNSLA &amp; Accademia Pontaniana, Napoli</span></li>
+      <li><span class="t">Alcune grandi occasioni di divulgazione della matematica nelle Accademie</span><br><span class="m">6 Jun 2025 · Le Accademie e la divulgazione della cultura, SNSLA &amp; Accademia Pontaniana, Napoli</span></li>
+      <li><span class="t">La matematica del Cubo di Rubik</span><br><span class="m">23 Jan 2025 · Fondazione CRC, side event of “50 anni di Cubo”, Cuneo</span></li>
+      <li><span class="t">MaPematica</span><br><span class="m">23 Apr 2024 · Dalle Teorie ai Modelli: Storie di Scienziati e Scoperte Scientifiche, Napoli</span></li>
+      <li><span class="t">MatematicaMen…del</span><br><span class="m">10 May 2022 · Mendel days @ unina, Napoli</span></li>
+      <li><span class="t">Contando le note</span><br><span class="m">29 Nov 2019 · Come alla Corte Young Edition, Napoli</span></li>
+      <li><span class="t">Note Pitagoriche</span><br><span class="m">8 Apr 2019 · Award ceremony of the Olimpiadi di Matematica, Federico II</span></li>
+    </ul>
+  </section>
+
+  <section id="contact">
+    <h2>Contact</h2>
+    <div class="contact">
+      <div>
+        <div class="k">Address</div>
+        <p>Dipartimento di Matematica e Applicazioni “R. Caccioppoli”<br>Università degli Studi di Napoli Federico II<br>Via Cintia, Monte S. Angelo<br>I-80126 Napoli, Italy</p>
+      </div>
+      <div>
+        <div class="k">Email</div>
+        <p><a href="mailto:c.nitsch@unina.it">c.nitsch@unina.it</a></p>
+        <div class="k" style="margin-top:16px">Phone</div>
+        <p>+39 081 675656</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>© <span id="yr"></span> Carlo Nitsch</footer>
+
+
+<script>
+// [authors, title, venue, year, link]  — link: arXiv id or full URL
+const PUBS = [
+  ["P. Acampora, E. Cristoforoni, C. Nitsch, C. Trombetti", "On the optimal shape of a thin insulating layer", "arXiv preprint", 2023, "2305.04078"],
+  ["V. Amato, A. Gentile, C. Nitsch, C. Trombetti", "On the gradient rearrangement of functions", "arXiv preprint", 2023, "2302.11332"],
+  ["A. Alvino, C. Nitsch, C. Trombetti", "A Talenti comparison result for solutions to elliptic problems with Robin boundary conditions", "Communications on Pure and Applied Mathematics", 2023, "1909.11950"],
+  ["A. Alvino, F. Chiacchio, C. Nitsch, C. Trombetti", "Weighted symmetrization results for a problem with variable Robin parameter", "Annali di Matematica Pura ed Applicata", 2023, "2207.14010"],
+  ["V. Amato, A.L. Masiello, C. Nitsch, C. Trombetti", "On the solutions to <i>p</i>-Poisson equation with Robin boundary conditions when <i>p</i> goes to +∞", "Advances in Nonlinear Analysis", 2022, "2111.10107"],
+  ["S. Cuomo, F. Giampaolo, S. Izzo, C. Nitsch, F. Piccialli, C. Trombetti", "A physics-informed learning approach to Bernoulli-type free boundary problems", "Computers &amp; Mathematics with Applications", 2022, "https://www.sciencedirect.com/science/article/pii/S0898122122004266"],
+  ["F. Chiacchio, N. Gavitone, C. Nitsch, C. Trombetti", "Sharp estimates for the Gaussian torsional rigidity with Robin boundary conditions", "Potential Analysis", 2022, "2109.10117"],
+  ["P. Acampora, E. Cristoforoni, C. Nitsch, C. Trombetti", "A free boundary problem in thermal insulation with a prescribed heat source", "arXiv preprint", 2022, "2205.03275"],
+  ["D. Bucur, M. Nahon, C. Nitsch, C. Trombetti", "Shape optimization of a thermal insulation problem", "Calculus of Variations and Partial Differential Equations", 2021, "2112.07300"],
+  ["F. Calabrò, S. Cuomo, F. Giampaolo, S. Izzo, C. Nitsch, F. Piccialli, C. Trombetti", "Deep learning for the approximation of a shape functional", "arXiv preprint", 2021, "2110.02112"],
+  ["F. Della Pietra, C. Nitsch, F. Oliva, C. Trombetti", "On the behaviour of the first eigenvalue of the <i>p</i>-Laplacian with Robin boundary conditions as <i>p</i> goes to 1", "Advances in Calculus of Variations", 2021, ""],
+  ["D. Bucur, V. Ferone, C. Nitsch, C. Trombetti", "Weinstock inequality in higher dimensions", "Journal of Differential Geometry", 2021, "1710.04587"],
+  ["F. Della Pietra, C. Nitsch, R. Scala, C. Trombetti", "An optimization problem in thermal insulation with Robin boundary conditions", "Communications in Partial Differential Equations", 2021, "2008.02193"],
+  ["A. Alvino, F. Chiacchio, C. Nitsch, C. Trombetti", "Sharp estimates for solutions to elliptic problems with mixed boundary conditions", "Journal de Mathématiques Pures et Appliquées", 2021, "2009.04320"],
+  ["G. Floridia, C. Nitsch, C. Trombetti", "Multiplicative controllability for nonlinear degenerate parabolic equations between sign-changing states", "ESAIM: Control, Optimisation and Calculus of Variations", 2020, "1710.00690"],
+  ["M. van den Berg, V. Ferone, C. Nitsch, C. Trombetti", "On a Pólya functional for rhombi, isosceles triangles, and thinning convex sets", "Revista Matemática Iberoamericana", 2020, "1811.04503"],
+  ["F. Della Pietra, C. Nitsch, C. Trombetti", "An optimal insulation problem", "Mathematische Annalen", 2020, "2005.11934"],
+  ["D. Bucur, V. Ferone, C. Nitsch, C. Trombetti", "A sharp estimate for the first Robin–Laplacian eigenvalue with negative boundary parameter", "Rendiconti Lincei – Matematica e Applicazioni", 2019, ""],
+  ["A. Henrot, C. Nitsch, P. Salani, C. Trombetti", "Optimal concavity of the torsion function", "Journal of Optimization Theory and Applications", 2018, ""],
+  ["D. Bucur, V. Ferone, C. Nitsch, C. Trombetti", "The quantitative Faber–Krahn inequality for the Robin Laplacian", "Journal of Differential Equations", 2018, ""],
+  ["C. Nitsch, C. Trombetti", "The classical overdetermined Serrin problem", "Complex Variables and Elliptic Equations", 2018, ""],
+  ["A. Cianchi, V. Ferone, C. Nitsch, C. Trombetti", "Poincaré trace inequalities in BV(𝔹<sup><i>n</i></sup>) with non-standard normalization", "The Journal of Geometric Analysis", 2018, ""],
+  ["D. Bucur, G. Buttazzo, C. Nitsch", "Two optimization problems in thermal insulation", "Notices of the AMS", 2017, ""],
+  ["V. Ferone, B. Kawohl, C. Nitsch", "The elastica problem under area constraint", "Mathematische Annalen", 2016, ""],
+  ["V. Ferone, B. Kawohl, C. Nitsch", "Generalized elastica problems under area constraint", "arXiv preprint", 2016, "1606.01569"],
+  ["L. Brasco, C. Nitsch, C. Trombetti", "An inequality à la Szegő–Weinberger for the <i>p</i>-Laplacian on convex sets", "Communications in Contemporary Mathematics", 2016, ""],
+  ["D. Bucur, G. Buttazzo, C. Nitsch", "Symmetry breaking for a problem in optimal insulation", "", 2016, ""],
+  ["M. van den Berg, V. Ferone, C. Nitsch, C. Trombetti", "On Pólya’s inequality for torsional rigidity and first Dirichlet eigenvalue", "Integral Equations and Operator Theory", 2016, ""],
+  ["V. Ferone, C. Nitsch, C. Trombetti", "On the maximal mean curvature of a smooth surface", "Comptes Rendus Mathématique", 2016, ""],
+  ["F. Gazzola, K. Ishige, C. Nitsch, P. Salani (eds.)", "Geometric Properties for Parabolic and Elliptic PDE’s (GPPEPDEs, Palinuro, Italy, May 2015)", "Springer Proceedings in Mathematics &amp; Statistics", 2016, ""],
+  ["V. Ferone, C. Nitsch, C. Trombetti", "On a conjectured reverse Faber–Krahn inequality for a Steklov-type Laplacian eigenvalue", "Communications on Pure and Applied Analysis", 2015, ""],
+  ["C. Nitsch", "An isoperimetric result for the fundamental frequency via domain derivative", "Calculus of Variations and Partial Differential Equations", 2014, ""],
+  ["A. Cianchi, V. Ferone, C. Nitsch, C. Trombetti", "Balls minimize trace constants in BV", "Journal für die reine und angewandte Mathematik", 2014, ""],
+  ["B. Brandolini, F. Della Pietra, C. Nitsch, C. Trombetti", "Symmetry breaking in a constrained Cheeger type isoperimetric inequality", "ESAIM: Control, Optimisation and Calculus of Variations", 2014, "1305.6271"],
+  ["B. Brandolini, N. Gavitone, C. Nitsch, C. Trombetti", "Characterization of ellipsoids through an overdetermined boundary value problem of Monge–Ampère type", "Journal de Mathématiques Pures et Appliquées", 2014, "1305.2312"],
+  ["C. Nitsch", "On the first Dirichlet Laplacian eigenvalue of regular polygons", "Kodai Mathematical Journal", 2014, ""],
+  ["B. Kawohl, C. Nitsch, G. Sweers", "More on the potential for the farthest-point distance function", "Potential Analysis", 2014, ""],
+  ["L. Esposito, B. Kawohl, C. Nitsch, C. Trombetti", "The Neumann eigenvalue problem for the ∞-Laplacian", "arXiv preprint", 2014, "1405.3535"],
+  ["L. Brasco, C. Nitsch, A. Pratelli", "On the boundary of the attainable set of the Dirichlet spectrum", "Zeitschrift für Angewandte Mathematik und Physik (ZAMP)", 2013, ""],
+  ["L. Esposito, C. Nitsch, C. Trombetti", "Best constants in Poincaré inequalities for convex domains", "Journal of Convex Analysis", 2013, ""],
+  ["V. Ferone, C. Nitsch, C. Trombetti", "A remark on optimal weighted Poincaré inequalities for convex domains", "Rendiconti Lincei – Matematica e Applicazioni", 2012, ""],
+  ["L. Esposito, V. Ferone, B. Kawohl, C. Nitsch, C. Trombetti", "The longest shortest fence and sharp Poincaré–Sobolev inequalities", "Archive for Rational Mechanics and Analysis", 2012, ""],
+  ["A. Alvino, V. Ferone, C. Nitsch", "A sharp isoperimetric inequality in the plane", "Journal of the European Mathematical Society", 2011, ""],
+  ["B. Brandolini, P. Freitas, C. Nitsch, C. Trombetti", "Sharp estimates and saturation phenomena for a nonlocal eigenvalue problem", "Advances in Mathematics", 2011, ""],
+  ["B. Brandolini, C. Nitsch, C. Trombetti", "Shape optimization for Monge–Ampère equations via domain derivative", "Discrete and Continuous Dynamical Systems – Series S", 2011, ""],
+  ["B. Brandolini, C. Nitsch, C. Trombetti", "An upper bound for nonlinear eigenvalues on convex domains by means of the isoperimetric deficit", "Archiv der Mathematik", 2010, ""],
+  ["F. Clarelli, R. Natalini, C. Nitsch, M.L. Santarelli", "A mathematical model for consolidation of building stones", "Applied and Industrial Mathematics in Italy III", 2010, ""],
+  ["M. Bertsch, C. Nitsch", "Groundwater flow in a fissurised porous stratum", "Networks &amp; Heterogeneous Media", 2010, ""],
+  ["B. Brandolini, C. Nitsch, C. Trombetti", "New isoperimetric estimates for solutions to Monge–Ampère equations", "Annales de l’IHP Analyse non linéaire", 2009, ""],
+  ["B. Brandolini, C. Nitsch, P. Salani, C. Trombetti", "Stability of radial symmetry for a Monge–Ampère overdetermined problem", "Annali di Matematica Pura ed Applicata", 2009, ""],
+  ["A. Alvino, V. Ferone, C. Nitsch", "A sharp isoperimetric inequality in the plane involving Hausdorff distance", "Rendiconti Lincei – Matematica e Applicazioni", 2009, ""],
+  ["B. Brandolini, C. Nitsch, P. Salani, C. Trombetti", "Serrin-type overdetermined problems: an alternative proof", "Archive for Rational Mechanics and Analysis", 2008, ""],
+  ["B. Brandolini, C. Nitsch, P. Salani, C. Trombetti", "On the stability of the Serrin problem", "Journal of Differential Equations", 2008, ""],
+  ["B. Brandolini, C. Nitsch, P. Salani, C. Trombetti", "A note on the Serrin problem in the plane", "Le Matematiche", 2008, ""],
+  ["M. Bertsch, C. Nitsch", "Traveling wave solutions of a nonlinear degenerate parabolic system from petroleum engineering", "Interfaces and Free Boundaries", 2008, ""],
+  ["F. Clarelli, C. Giavarini, R. Natalini, C. Nitsch, M.L. Santarelli", "Mathematical models for the consolidation processes in stones", "Proc. Eu-ARTECH Int. Symposium: Stone Consolidation in Cultural Heritage, Lisbon", 2008, ""],
+  ["C. Nitsch", "The quantitative isoperimetric inequality for planar convex domains", "Bollettino dell’Unione Matematica Italiana", 2008, ""],
+  ["B. Brandolini, M. Cicalese, C. Nitsch, C. Trombetti", "A sharp estimate of the extinction time for the mean curvature flow", "Applied Mathematics Letters", 2007, ""],
+  ["G.I. Barenblatt, M. Bertsch, C. Nitsch", "Nonlocal damage accumulation and fluid flow in diatomites", "Communications in Applied Mathematics and Computational Science", 2006, ""],
+  ["C. Nitsch", "A free boundary problem for nonlocal damage propagation in diatomites", "Free Boundary Problems", 2006, ""],
+  ["R. Dal Passo, M. Bertsch, C. Nitsch", "A system of degenerate parabolic nonlinear PDE’s: a new free boundary problem", "Interfaces and Free Boundaries", 2005, ""],
+  ["C. Nitsch", "A nonlinear parabolic system arising in damage mechanics under chemical aggression", "Nonlinear Analysis: Theory, Methods &amp; Applications", 2005, ""],
+  ["B. Brandolini, M. Cicalese, C. Nitsch, C. Trombetti", "Some remarks on the extinction time for the mean curvature flow", "", 2005, ""],
+  ["R. Natalini, C. Nitsch, G. Pontrelli, S. Sbaraglia", "A numerical study of a nonlocal model of damage propagation under chemical aggression", "European Journal of Applied Mathematics", 2003, ""],
+];
+
+const list = document.getElementById("publist");
+const count = document.getElementById("pubcount");
+const strip = s => s.replace(/<[^>]+>/g, "").replace(/&amp;/g, "&").toLowerCase();
+
+function render(q = "") {
+  q = q.trim().toLowerCase();
+  const hits = PUBS.filter(p => !q || strip(p.slice(0, 4).join(" ")).includes(q));
+  count.textContent = q ? `${hits.length} of ${PUBS.length}` : `${PUBS.length} items`;
+  let html = "", year = null;
+  for (const [authors, title, venue, y, link] of hits) {
+    if (y !== year) { if (year !== null) html += "</ul>"; html += `<div class="year">${y}</div><ul class="pubs">`; year = y; }
+    let tag = "";
+    if (link) {
+      const isArxiv = !link.startsWith("http");
+      tag = `<a class="tag" href="${isArxiv ? "https://arxiv.org/abs/" + link : link}">${isArxiv ? "arXiv" : "Journal"}</a>`;
+    }
+    html += `<li><div class="title">${title}${tag}</div><div class="authors">${authors}</div>${venue ? `<div class="venue">${venue}</div>` : ""}</li>`;
+  }
+  if (year !== null) html += "</ul>";
+  list.innerHTML = html || `<p style="color:var(--muted)">No matching publications.</p>`;
+}
+render();
+document.getElementById("pubsearch").addEventListener("input", e => render(e.target.value));
+document.getElementById("yr").textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
